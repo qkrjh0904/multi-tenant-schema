@@ -1,0 +1,17 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:4306/test
+      username: root
+      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: on
+      multiline: true
