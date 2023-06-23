@@ -33,6 +33,7 @@ public class EntityManagerConfig {
         properties.put(AvailableSettings.DEFAULT_BATCH_FETCH_SIZE, 500);
         properties.put(AvailableSettings.DIALECT, MariaDBDialect.class);
 
+
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(dataSource);
         emf.setPackagesToScan(PACKAGE_TO_SCAN);
