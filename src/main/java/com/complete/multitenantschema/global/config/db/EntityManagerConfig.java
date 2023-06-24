@@ -26,13 +26,16 @@ public class EntityManagerConfig {
     private final DataSource dataSource;
 
     @Bean(name = "entityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(SchemaMultiTenantConnectionProvider schemaMultiTenantConnectionProvider,
+                                                                       MultiTenantIdentifierResolver multiTenantIdentifierResolver) {
+
         Map<String, Object> properties = new HashMap<>();
         properties.put(AvailableSettings.HBM2DDL_AUTO, "update");
         properties.put(AvailableSettings.PHYSICAL_NAMING_STRATEGY, "org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy");
+        properties.put(AvailableSettings.MULTI_TENANT_CONNECTION_PROVIDER, schemaMultiTenantConnectionProvider);
+        properties.put(AvailableSettings.MULTI_TENANT_IDENTIFIER_RESOLVER, multiTenantIdentifierResolver);
         properties.put(AvailableSettings.DEFAULT_BATCH_FETCH_SIZE, 500);
         properties.put(AvailableSettings.DIALECT, MariaDBDialect.class);
-
 
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(dataSource);
